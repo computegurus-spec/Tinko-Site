@@ -1,58 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tinko - Local AI Marketplace</title>
+  <meta charset="utf-8" />
+  <title>Tinko – AI-Powered Payment Recovery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Tinko helps Indian merchants recover failed UPI & card payments with AI-driven retries, smart reminders, and multi-channel notifications." />
+
+  <!-- Social cards -->
+  <meta property="og:title" content="Tinko – AI-Powered Payment Recovery" />
+  <meta property="og:description" content="Recover failed UPI & card payments automatically with smart retries and multi-channel nudges." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tinko.in/" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2300bfa6'/%3E%3Cpath d='M18 34c0-8 6-14 14-14s14 6 14 14-6 14-14 14c-3 0-6-1-8-3l-6 2 2-6c-1-2-2-4-2-7z' fill='white'/%3E%3C/svg%3E" />
+
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #00bfa6, #00a0ff);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
+    :root{
+      --bg1:#0ea5e9;      /* sky-500 */
+      --bg2:#06b6d4;      /* cyan-500 */
+      --brand:#0ea5e9;
+      --ink:#0b1220;
+      --muted:#5b7083;
+      --card:#ffffff;
+      --ring:#dbeafe;
+      --btn:#0f172a;      /* slate-900 */
+      --btnTxt:#ffffff;
+      --ok:#10b981;
+      --warn:#f59e0b;
     }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background: radial-gradient(1100px 700px at 20% -10%, var(--bg2) 0, transparent 60%),
+                  radial-gradient(1100px 700px at 120% 10%, var(--bg1) 0, transparent 60%),
+                  linear-gradient(120deg, #e6f9ff, #f8fbff);
     }
-    p {
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
+    a{color:var(--brand);text-decoration:none}
+    a:hover{opacity:.9}
+    .container{max-width:1120px;margin:0 auto;padding:24px}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;letter-spacing:.2px}
+    .logo-badge{
+      width:36px;height:36px;border-radius:10px;
+      background:conic-gradient(from 180deg, var(--bg2), var(--bg1));
+      display:grid;place-items:center;color:white;font-weight:900
     }
-    .links a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 10px;
-      border: 1px solid #fff;
-      padding: 8px 16px;
-      border-radius: 5px;
-      transition: background 0.3s;
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap}
+    .nav-links a{font-weight:600;color:#0b1220}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 18px;border-radius:10px;border:1px solid #0b12201a;
+      background:var(--btn);color:var(--btnTxt);font-weight:700;
+      box-shadow:0 8px 20px #0b12201a;transition:transform .08s ease, box-shadow .2s ease
     }
-    .links a:hover {
-      background: rgba(255, 255, 255, 0.2);
+    .btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px #0b122028}
+    .btn-outline{background:#fff;color:var(--btn);border-color:#0b12202b}
+    .hero{padding:56px 0 34px;text-align:center}
+    .eyebrow{
+      display:inline-flex;gap:10px;align-items:center;
+      padding:6px 10px;border-radius:999px;background:#ffffffc2;border:1px solid var(--ring);
+      font-size:.875rem;color:#0b1220;font-weight:600
     }
-    footer {
-      position: absolute;
-      bottom: 20px;
-      font-size: 0.9rem;
-      opacity: 0.8;
+    .title{margin:16px auto 10px;font-size:clamp(2rem,5vw,3.4rem);line-height:1.06;font-weight:900;max-width:960px;color:#0b1220}
+    .subtitle{margin:0 auto 22px;max-width:800px;color:#1f2937;font-size:clamp(1.05rem,2.5vw,1.25rem)}
+    .hero-ctas{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:#ffffff;border:1px solid var(--ring);font-weight:700
     }
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:36px}
+    .card{
+      grid-column:span 12;background:var(--card);border:1px solid #e5e7eb;border-radius:16px;padding:22px;
+      box-shadow:0 8px 16px #0b12200d
+    }
+    @media(min-width:900px){
+      .card.span4{grid-column:span 4}
+      .card.span6{grid-column:span 6}
+    }
+    .kpi{display:flex;align-items:center;gap:10px}
+    .tag{font-weight:800;padding:6px 10px;border-radius:999px}
+    .tag.ok{background:#ecfdf5;color:#065f46}
+    .tag.warn{background:#fff7ed;color:#92400e}
+    .list{margin:14px 0 0;padding:0 0 0 18px}
+    .muted{color:var(--muted)}
+    .footer{
+      margin-top:64px;padding:28px 0;border-top:1px solid #e5e7eb;background:#fff7;
+      backdrop-filter:saturate(140%) blur(4px)
+    }
+    .footer-inner{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+    .links{display:flex;gap:16px;flex-wrap:wrap}
+    .links a{color:#0b1220;font-weight:600}
   </style>
 </head>
 <body>
-  <h1>Welcome to Tinko</h1>
-  <p>India’s first AI-driven hyperlocal marketplace</p>
-  <div class="links">
-    <a href="/privacy.html">Privacy Policy</a>
-    <a href="/terms.html">Terms & Conditions</a>
-    <a href="/refunds.html">Refund Policy</a>
-  </div>
-  <footer>© 2025 Tinko. All rights reserved.</footer>
+  <header class="container nav">
+    <div class="logo">
+      <div class="logo-badge">T</div>
+      Tinko
+    </div>
+    <nav class="nav-links">
+      <a href="/privacy.html" target="_blank" rel="noopener">Privacy</a>
+      <a href="/terms.html" target="_blank" rel="noopener">Terms</a>
+      <a href="/refunds.html" target="_blank" rel="noopener">Refunds</a>
+    </nav>
+  </header>
+
+  <section class="container hero">
+    <span class="eyebrow">AI-powered · Payment Recovery</span>
+    <h1 class="title">Recover Failed UPI & Card Payments — Automatically</h1>
+    <p class="subtitle">
+      <strong>Tinko</strong> reduces revenue loss from failed payments with intelligent retries,
+      contextual reminders, and WhatsApp/SMS/email nudges — all privacy-safe and merchant-friendly.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn" href="mailto:contact@tinko.in">Talk to us</a>
+      <a class="btn btn-outline" href="/privacy.html" target="_blank" rel="noopener">Read our Privacy Policy</a>
+    </div>
+
+    <div class="hero-ctas" style="margin-top:18px">
+      <span class="pill">Razorpay-ready</span>
+      <span class="pill">Multi-merchant</span>
+      <span class="pill">WhatsApp & Email</span>
+      <span class="pill">Dashboard Insights</span>
+    </div>
+  </section>
+
+  <section class="container grid">
+    <article class="card span4">
+      <h3>How it works</h3>
+      <ol class="list">
+        <li>Listen to <strong>Razorpay</strong> webhooks for <em>payment.failed</em> & <em>payment.captured</em>.</li>
+        <li>Store events securely per merchant with idempotency & audit trails.</li>
+        <li>Trigger smart reminders with deep links for easy retries.</li>
+      </ol>
+    </article>
+
+    <article class="card span4">
+      <h3>Why merchants love it</h3>
+      <ul class="list">
+        <li>Recover revenue you’re already earning — with zero churn friction.</li>
+        <li>Setup in minutes; no checkout changes.</li>
+        <li>Clear analytics: failed vs. recovered, total recovered ₹.</li>
+      </ul>
+    </article>
+
+    <article class="card span4">
+      <h3>Security & Compliance</h3>
+      <ul class="list">
+        <li>No card data stored. Webhook secrets per merchant.</li>
+        <li>Least-privilege DB access & audit logs.</li>
+        <li>Honors user consent & opt-out for communication.</li>
+      </ul>
+    </article>
+
+    <article class="card span6">
+      <div class="kpi">
+        <span class="tag ok">↑ Recovery</span>
+        <h3 style="margin:0">Typical uplift 10–25% on failed payments</h3>
+      </div>
+      <p class="muted">Based on retry timing + preferred channel nudges.</p>
+    </article>
+
+    <article class="card span6">
+      <div class="kpi">
+        <span class="tag warn">↓ Effort</span>
+        <h3 style="margin:0">No engineering rewrite needed</h3>
+      </div>
+      <p class="muted">Drop-in Razorpay webhook + API key per merchant. Done.</p>
+    </article>
+  </section>
+
+  <section class="container" style="text-align:center;margin-top:30px">
+    <a class="btn" href="mailto:contact@tinko.in">Schedule a demo</a>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="logo" style="font-weight:800"><div class="logo-badge">T</div> Tinko</div>
+      <div class="links">
+        <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
+        <a href="/terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+        <a href="/refunds.html" target="_blank" rel="noopener">Refund Policy</a>
+        <a href="mailto:contact@tinko.in">contact@tinko.in</a>
+      </div>
+      <div class="muted">© <span id="y"></span> Tinko. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </body>
 </html>
