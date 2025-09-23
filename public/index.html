@@ -2,193 +2,115 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Tinko – AI-Powered Payment Recovery</title>
+  <title>Tinko – Recover Failed Payments Easily</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Tinko helps Indian merchants recover failed UPI & card payments with AI-driven retries, smart reminders, and multi-channel notifications." />
-
-  <!-- Social cards -->
-  <meta property="og:title" content="Tinko – AI-Powered Payment Recovery" />
-  <meta property="og:description" content="Recover failed UPI & card payments automatically with smart retries and multi-channel nudges." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tinko.in/" />
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2300bfa6'/%3E%3Cpath d='M18 34c0-8 6-14 14-14s14 6 14 14-6 14-14 14c-3 0-6-1-8-3l-6 2 2-6c-1-2-2-4-2-7z' fill='white'/%3E%3C/svg%3E" />
-
+  <meta name="description" content="Tinko helps merchants recover failed UPI & card payments with automatic reminders and smart notifications." />
   <style>
     :root{
-      --bg1:#0ea5e9;      /* sky-500 */
-      --bg2:#06b6d4;      /* cyan-500 */
       --brand:#0ea5e9;
       --ink:#0b1220;
       --muted:#5b7083;
-      --card:#ffffff;
-      --ring:#dbeafe;
-      --btn:#0f172a;      /* slate-900 */
-      --btnTxt:#ffffff;
-      --ok:#10b981;
-      --warn:#f59e0b;
+      --btn:#0f172a;
+      --btnTxt:#fff;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color:var(--ink);
-      background: radial-gradient(1100px 700px at 20% -10%, var(--bg2) 0, transparent 60%),
-                  radial-gradient(1100px 700px at 120% 10%, var(--bg1) 0, transparent 60%),
-                  linear-gradient(120deg, #e6f9ff, #f8fbff);
-    }
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#f9fafb;color:var(--ink)}
     a{color:var(--brand);text-decoration:none}
-    a:hover{opacity:.9}
-    .container{max-width:1120px;margin:0 auto;padding:24px}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;letter-spacing:.2px}
-    .logo-badge{
-      width:36px;height:36px;border-radius:10px;
-      background:conic-gradient(from 180deg, var(--bg2), var(--bg1));
-      display:grid;place-items:center;color:white;font-weight:900
-    }
-    .nav-links{display:flex;gap:18px;flex-wrap:wrap}
-    .nav-links a{font-weight:600;color:#0b1220}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:12px 18px;border-radius:10px;border:1px solid #0b12201a;
-      background:var(--btn);color:var(--btnTxt);font-weight:700;
-      box-shadow:0 8px 20px #0b12201a;transition:transform .08s ease, box-shadow .2s ease
-    }
-    .btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px #0b122028}
-    .btn-outline{background:#fff;color:var(--btn);border-color:#0b12202b}
-    .hero{padding:56px 0 34px;text-align:center}
-    .eyebrow{
-      display:inline-flex;gap:10px;align-items:center;
-      padding:6px 10px;border-radius:999px;background:#ffffffc2;border:1px solid var(--ring);
-      font-size:.875rem;color:#0b1220;font-weight:600
-    }
-    .title{margin:16px auto 10px;font-size:clamp(2rem,5vw,3.4rem);line-height:1.06;font-weight:900;max-width:960px;color:#0b1220}
-    .subtitle{margin:0 auto 22px;max-width:800px;color:#1f2937;font-size:clamp(1.05rem,2.5vw,1.25rem)}
-    .hero-ctas{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:14px}
-    .pill{
-      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:#ffffff;border:1px solid var(--ring);font-weight:700
-    }
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;margin-top:36px}
-    .card{
-      grid-column:span 12;background:var(--card);border:1px solid #e5e7eb;border-radius:16px;padding:22px;
-      box-shadow:0 8px 16px #0b12200d
-    }
-    @media(min-width:900px){
-      .card.span4{grid-column:span 4}
-      .card.span6{grid-column:span 6}
-    }
-    .kpi{display:flex;align-items:center;gap:10px}
-    .tag{font-weight:800;padding:6px 10px;border-radius:999px}
-    .tag.ok{background:#ecfdf5;color:#065f46}
-    .tag.warn{background:#fff7ed;color:#92400e}
-    .list{margin:14px 0 0;padding:0 0 0 18px}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    .nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.2rem}
+    .logo-badge{width:36px;height:36px;border-radius:8px;background:var(--brand);display:grid;place-items:center;color:white;font-weight:900}
+    .nav-links{display:flex;gap:16px}
+    .btn{padding:12px 20px;border-radius:8px;font-weight:700;border:none;cursor:pointer}
+    .btn-primary{background:var(--btn);color:var(--btnTxt)}
+    .btn-outline{background:white;color:var(--btn);border:1px solid var(--btn)}
+    .hero{text-align:center;padding:64px 24px}
+    .hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;margin:16px 0}
+    .hero p{font-size:1.2rem;max-width:700px;margin:0 auto 24px}
+    .grid{display:grid;gap:20px;margin-top:40px}
+    @media(min-width:900px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+    .card{background:white;border:1px solid #e5e7eb;border-radius:12px;padding:20px;box-shadow:0 4px 12px #0001}
+    .section-title{text-align:center;font-size:1.8rem;font-weight:800;margin-top:60px}
+    .logos{display:flex;justify-content:center;flex-wrap:wrap;gap:24px;margin-top:20px}
+    .logo-box{width:120px;height:60px;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:8px;display:grid;place-items:center;font-weight:600;color:#9ca3af}
+    .pricing{text-align:center;padding:40px 20px}
+    .footer{margin-top:60px;padding:24px;border-top:1px solid #e5e7eb;text-align:center;background:#fff}
+    .footer a{margin:0 8px;font-weight:600;color:var(--ink)}
     .muted{color:var(--muted)}
-    .footer{
-      margin-top:64px;padding:28px 0;border-top:1px solid #e5e7eb;background:#fff7;
-      backdrop-filter:saturate(140%) blur(4px)
-    }
-    .footer-inner{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
-    .links{display:flex;gap:16px;flex-wrap:wrap}
-    .links a{color:#0b1220;font-weight:600}
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header class="container nav">
     <div class="logo">
-      <div class="logo-badge">T</div>
-      Tinko
+      <div class="logo-badge">T</div> Tinko
     </div>
     <nav class="nav-links">
-      <a href="/privacy.html" target="_blank" rel="noopener">Privacy</a>
-      <a href="/terms.html" target="_blank" rel="noopener">Terms</a>
-      <a href="/refunds.html" target="_blank" rel="noopener">Refunds</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/refunds.html">Refunds</a>
     </nav>
   </header>
 
-  <section class="container hero">
-    <span class="eyebrow">AI-powered · Payment Recovery</span>
-    <h1 class="title">Recover Failed UPI & Card Payments — Automatically</h1>
-    <p class="subtitle">
-      <strong>Tinko</strong> reduces revenue loss from failed payments with intelligent retries,
-      contextual reminders, and WhatsApp/SMS/email nudges — all privacy-safe and merchant-friendly.
-    </p>
-    <div class="hero-ctas">
-      <a class="btn" href="mailto:contact@tinko.in">Talk to us</a>
-      <a class="btn btn-outline" href="/privacy.html" target="_blank" rel="noopener">Read our Privacy Policy</a>
-    </div>
-
-    <div class="hero-ctas" style="margin-top:18px">
-      <span class="pill">Razorpay-ready</span>
-      <span class="pill">Multi-merchant</span>
-      <span class="pill">WhatsApp & Email</span>
-      <span class="pill">Dashboard Insights</span>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Recover More Revenue from Failed Payments</h1>
+    <p>Every failed UPI or card transaction is lost money.  
+       Tinko automatically reminds your customers, helps them retry, and brings that money back to you.</p>
+    <div>
+      <a href="mailto:contact@tinko.in" class="btn btn-primary">Schedule a Demo</a>
+      <a href="/privacy.html" class="btn btn-outline">View Privacy Policy</a>
     </div>
   </section>
 
-  <section class="container grid">
-    <article class="card span4">
-      <h3>How it works</h3>
-      <ol class="list">
-        <li>Listen to <strong>Razorpay</strong> webhooks for <em>payment.failed</em> & <em>payment.captured</em>.</li>
-        <li>Store events securely per merchant with idempotency & audit trails.</li>
-        <li>Trigger smart reminders with deep links for easy retries.</li>
-      </ol>
-    </article>
-
-    <article class="card span4">
-      <h3>Why merchants love it</h3>
-      <ul class="list">
-        <li>Recover revenue you’re already earning — with zero churn friction.</li>
-        <li>Setup in minutes; no checkout changes.</li>
-        <li>Clear analytics: failed vs. recovered, total recovered ₹.</li>
-      </ul>
-    </article>
-
-    <article class="card span4">
-      <h3>Security & Compliance</h3>
-      <ul class="list">
-        <li>No card data stored. Webhook secrets per merchant.</li>
-        <li>Least-privilege DB access & audit logs.</li>
-        <li>Honors user consent & opt-out for communication.</li>
-      </ul>
-    </article>
-
-    <article class="card span6">
-      <div class="kpi">
-        <span class="tag ok">↑ Recovery</span>
-        <h3 style="margin:0">Typical uplift 10–25% on failed payments</h3>
-      </div>
-      <p class="muted">Based on retry timing + preferred channel nudges.</p>
-    </article>
-
-    <article class="card span6">
-      <div class="kpi">
-        <span class="tag warn">↓ Effort</span>
-        <h3 style="margin:0">No engineering rewrite needed</h3>
-      </div>
-      <p class="muted">Drop-in Razorpay webhook + API key per merchant. Done.</p>
-    </article>
+  <!-- Benefits -->
+  <section class="container grid grid-3">
+    <div class="card">
+      <h3>More Revenue</h3>
+      <p>Recover 10–25% of failed transactions with automatic reminders sent at the right time.</p>
+    </div>
+    <div class="card">
+      <h3>Zero Extra Effort</h3>
+      <p>No changes to your checkout. Just connect Razorpay and let Tinko do the rest.</p>
+    </div>
+    <div class="card">
+      <h3>Safe & Secure</h3>
+      <p>No card data stored. Webhook secrets per merchant. Built with privacy first.</p>
+    </div>
   </section>
 
-  <section class="container" style="text-align:center;margin-top:30px">
-    <a class="btn" href="mailto:contact@tinko.in">Schedule a demo</a>
+  <!-- Trusted By -->
+  <h2 class="section-title">Trusted by Merchants</h2>
+  <div class="logos">
+    <div class="logo-box">Shop Logo</div>
+    <div class="logo-box">Shop Logo</div>
+    <div class="logo-box">Shop Logo</div>
+  </div>
+
+  <!-- Pricing -->
+  <section class="pricing">
+    <h2 class="section-title">Pricing</h2>
+    <p class="muted">Early Access: Free for first 3 months. Contact us for pricing plans.</p>
+    <a href="mailto:contact@tinko.in" class="btn btn-primary">Join Early Access</a>
   </section>
 
+  <!-- Contact -->
+  <section class="container">
+    <h2 class="section-title">Contact Us</h2>
+    <p>Email: <a href="mailto:contact@tinko.in">contact@tinko.in</a></p>
+    <p>Address: Tinko Technologies Pvt Ltd, Bangalore, India</p>
+  </section>
+
+  <!-- Footer -->
   <footer class="footer">
-    <div class="container footer-inner">
-      <div class="logo" style="font-weight:800"><div class="logo-badge">T</div> Tinko</div>
-      <div class="links">
-        <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>
-        <a href="/terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>
-        <a href="/refunds.html" target="_blank" rel="noopener">Refund Policy</a>
-        <a href="mailto:contact@tinko.in">contact@tinko.in</a>
-      </div>
-      <div class="muted">© <span id="y"></span> Tinko. All rights reserved.</div>
+    <p>&copy; <span id="y"></span> Tinko. All rights reserved.</p>
+    <div>
+      <a href="/privacy.html">Privacy Policy</a> |
+      <a href="/terms.html">Terms & Conditions</a> |
+      <a href="/refunds.html">Refund Policy</a>
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
