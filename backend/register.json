@@ -1,0 +1,12 @@
+{
+  "name": "Shop A",
+  "upi_vpa": "shopa@okhdfcbank",
+  "razorpay_key_id": "rzp_test_ABC123",
+  "razorpay_key_secret": "xyz987",
+  "razorpay_webhook_secret": "rzp_webhook_123",
+  "address": "12 MG Road",
+  "city": "Bangalore",
+  "state": "Karnataka",
+  "country": "India",
+  "pincode": "560001"
+}
