@@ -1,3 +1,4 @@
+Set-Content .gitignore @"
 # Python
 __pycache__/
 *.pyc
@@ -21,3 +22,6 @@ Thumbs.db
 *.env
 backend/.env
 .env.local
+"@
+git add .gitignore
+git commit -m "Populate .gitignore rules"
