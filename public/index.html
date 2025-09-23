@@ -2,115 +2,339 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Tinko – Recover Failed Payments Easily</title>
+  <title>Tinko — Recover Failed Payments Automatically</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Tinko helps merchants recover failed UPI & card payments with automatic reminders and smart notifications." />
+  <meta name="description" content="Tinko helps merchants recover failed payments automatically with smart reminders and an at-a-glance revenue dashboard." />
+  <link rel="icon" href="/assets/logo.png" />
   <style>
     :root{
-      --brand:#0ea5e9;
+      --teal:#009688;      /* Tinko teal */
+      --yellow:#FFC107;    /* Accent */
       --ink:#0b1220;
       --muted:#5b7083;
-      --btn:#0f172a;
-      --btnTxt:#fff;
+      --bg:#f9fafa;
+      --card:#ffffff;
+      --border:#e7ebef;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#f9fafb;color:var(--ink)}
-    a{color:var(--brand);text-decoration:none}
+    html,body{margin:0;padding:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    a{color:var(--teal);text-decoration:none}
     .container{max-width:1100px;margin:0 auto;padding:24px}
-    .nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    .logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.2rem}
-    .logo-badge{width:36px;height:36px;border-radius:8px;background:var(--brand);display:grid;place-items:center;color:white;font-weight:900}
-    .nav-links{display:flex;gap:16px}
-    .btn{padding:12px 20px;border-radius:8px;font-weight:700;border:none;cursor:pointer}
-    .btn-primary{background:var(--btn);color:var(--btnTxt)}
-    .btn-outline{background:white;color:var(--btn);border:1px solid var(--btn)}
-    .hero{text-align:center;padding:64px 24px}
-    .hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;margin:16px 0}
-    .hero p{font-size:1.2rem;max-width:700px;margin:0 auto 24px}
-    .grid{display:grid;gap:20px;margin-top:40px}
-    @media(min-width:900px){.grid-3{grid-template-columns:repeat(3,1fr)}}
-    .card{background:white;border:1px solid #e5e7eb;border-radius:12px;padding:20px;box-shadow:0 4px 12px #0001}
-    .section-title{text-align:center;font-size:1.8rem;font-weight:800;margin-top:60px}
-    .logos{display:flex;justify-content:center;flex-wrap:wrap;gap:24px;margin-top:20px}
-    .logo-box{width:120px;height:60px;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:8px;display:grid;place-items:center;font-weight:600;color:#9ca3af}
-    .pricing{text-align:center;padding:40px 20px}
-    .footer{margin-top:60px;padding:24px;border-top:1px solid #e5e7eb;text-align:center;background:#fff}
-    .footer a{margin:0 8px;font-weight:600;color:var(--ink)}
+
+    /* Nav */
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:42px;width:auto}
+    .brand-name{font-weight:800;font-size:1.25rem;color:var(--ink)}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap}
+    .nav-links a{font-weight:600;color:var(--ink)}
+    .cta-nav{padding:10px 14px;border:1px solid var(--ink);border-radius:8px}
+
+    /* Hero */
+    .hero{background:var(--teal);color:#fff;padding:64px 24px}
+    .hero-inner{max-width:1100px;margin:0 auto;display:grid;gap:18px;text-align:center}
+    .hero h1{font-size:clamp(2rem,4.6vw,3.2rem);margin:0 0 4px;font-weight:900;letter-spacing:-.02em}
+    .hero p{margin:0 auto;max-width:760px;opacity:.95;font-size:1.12rem}
+    .hero-cta{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+    .btn{padding:12px 18px;border-radius:10px;border:none;font-weight:800;cursor:pointer}
+    .btn-primary{background:#fff;color:var(--teal)}
+    .btn-outline{background:transparent;border:2px solid #fff;color:#fff}
+
+    /* Sections */
+    .section{padding:46px 24px}
+    .title{font-size:1.8rem;font-weight:900;text-align:center;margin:0 0 24px;color:var(--ink)}
+    .grid{display:grid;gap:18px}
+    @media(min-width:900px){.grid-3{grid-template-columns:repeat(3,1fr)}.grid-2{grid-template-columns:repeat(2,1fr)}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 6px 16px #00000010}
+    .card h3{margin:0 0 8px}
     .muted{color:var(--muted)}
+
+    /* Pricing / Form */
+    .pricing{text-align:center}
+    form.early{max-width:520px;margin:14px auto 0;display:grid;gap:10px}
+    .input{padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff}
+    .submit{background:var(--ink);color:#fff}
+
+    /* Footer */
+    .footer{padding:26px 24px;border-top:1px solid var(--border);background:#fff}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+    .foot-links{display:flex;gap:14px;flex-wrap:wrap}
+    .copy{color:var(--muted);font-size:.92rem}
+    .badge{display:inline-block;background:var(--yellow);color:#000;font-weight:800;padding:2px 8px;border-radius:999px;font-size:.78rem;margin-left:6px}
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="container nav">
-    <div class="logo">
-      <div class="logo-badge">T</div> Tinko
+
+  <!-- NAV -->
+  <header class="container nav" aria-label="Primary">
+    <div class="brand">
+      <img src="/assets/logo.png" alt="Tinko logo" />
+      <span class="brand-name">Tinko</span>
     </div>
     <nav class="nav-links">
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-      <a href="/refunds.html">Refunds</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact" class="cta-nav">Contact</a>
     </nav>
   </header>
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section class="hero">
-    <h1>Recover More Revenue from Failed Payments</h1>
-    <p>Every failed UPI or card transaction is lost money.  
-       Tinko automatically reminds your customers, helps them retry, and brings that money back to you.</p>
-    <div>
-      <a href="mailto:contact@tinko.in" class="btn btn-primary">Schedule a Demo</a>
-      <a href="/privacy.html" class="btn btn-outline">View Privacy Policy</a>
+    <div class="hero-inner">
+      <h1>Recover Failed Payments Automatically</h1>
+      <p>Stop leaving money on the table. Tinko detects failed attempts, nudges customers with smart reminders, and tracks how much revenue you recover — all in one simple dashboard.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#pricing">Join Early Access</a>
+        <a class="btn btn-outline" href="/privacy.html">Privacy Policy</a>
+      </div>
     </div>
   </section>
 
-  <!-- Benefits -->
-  <section class="container grid grid-3">
-    <div class="card">
-      <h3>More Revenue</h3>
-      <p>Recover 10–25% of failed transactions with automatic reminders sent at the right time.</p>
-    </div>
-    <div class="card">
-      <h3>Zero Extra Effort</h3>
-      <p>No changes to your checkout. Just connect Razorpay and let Tinko do the rest.</p>
-    </div>
-    <div class="card">
-      <h3>Safe & Secure</h3>
-      <p>No card data stored. Webhook secrets per merchant. Built with privacy first.</p>
+  <!-- BENEFITS -->
+  <section id="benefits" class="section container">
+    <h2 class="title">Why merchants choose Tinko</h2>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>More Revenue</h3>
+        <p class="muted">Recover additional income from customers who intended to pay but dropped off. Tinko brings them back, automatically.</p>
+      </div>
+      <div class="card">
+        <h3>Simple Setup</h3>
+        <p class="muted">Onboard in minutes. No checkout redesign. Start tracking recoveries right away.</p>
+      </div>
+      <div class="card">
+        <h3>Clear Insights</h3>
+        <p class="muted">See failed vs recovered amounts, recovery percentage, and total value brought back to your business.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Trusted By -->
-  <h2 class="section-title">Trusted by Merchants</h2>
-  <div class="logos">
-    <div class="logo-box">Shop Logo</div>
-    <div class="logo-box">Shop Logo</div>
-    <div class="logo-box">Shop Logo</div>
-  </div>
+  <!-- PRICING -->
+  <section id="pricing" class="section container pricing">
+    <h2 class="title">Pricing <span class="badge">Beta</span></h2>
+    <p class="muted">Early Access is <strong>free for the first 3 months</strong>. Limited slots.</p>
 
-  <!-- Pricing -->
-  <section class="pricing">
-    <h2 class="section-title">Pricing</h2>
-    <p class="muted">Early Access: Free for first 3 months. Contact us for pricing plans.</p>
-    <a href="mailto:contact@tinko.in" class="btn btn-primary">Join Early Access</a>
+    <!-- Early Access form (emails you) -->
+    <form
+      class="early"
+      action="https://formsubmit.co/contact@tinko.in"
+      method="POST"
+    >
+      <!-- FormSubmit options -->
+      <input type="hidden" name="_subject" value="Tinko — Early Access Request" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="https://tinko.in/?submitted=1#pricing" />
+
+      <input class="input" name="name" placeholder="Your name" required />
+      <input class="input" type="email" name="email" placeholder="Work email" required />
+      <input class="input" name="company" placeholder="Company (optional)" />
+      <button class="btn submit" type="submit">Join Early Access</button>
+    </form>
+
+    <p class="muted" style="margin-top:10px">Prefer email? Write to <a href="mailto:contact@tinko.in">contact@tinko.in</a></p>
   </section>
 
-  <!-- Contact -->
-  <section class="container">
-    <h2 class="section-title">Contact Us</h2>
-    <p>Email: <a href="mailto:contact@tinko.in">contact@tinko.in</a></p>
-    <p>Address: Tinko Technologies Pvt Ltd, Bangalore, India</p>
+  <!-- CONTACT -->
+  <section id="contact" class="section container">
+    <h2 class="title">Contact</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Talk to us</h3>
+        <p class="muted">Questions, demos, partnerships — we’d love to help.</p>
+        <p><strong>Email:</strong> <a href="mailto:contact@tinko.in">contact@tinko.in</a></p>
+      </div>
+      <div class="card">
+        <h3>Company</h3>
+        <p class="muted">Tinko is a product of <strong>Sankalpa Innovations Pvt Ltd</strong>.</p>
+        <p class="muted">Bangalore, India</p>
+      </div>
+    </div>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer class="footer">
-    <p>&copy; <span id="y"></span> Tinko. All rights reserved.</p>
-    <div>
-      <a href="/privacy.html">Privacy Policy</a> |
-      <a href="/terms.html">Terms & Conditions</a> |
-      <a href="/refunds.html">Refund Policy</a>
+    <div class="footer-inner">
+      <div class="copy">© <span id="y"></span> Tinko • A product of Sankalpa Innovations Pvt Ltd</div>
+      <div class="foot-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/refunds.html">Refunds</a>
+      </div>
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tinko — Recover Failed Payments Automatically</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Tinko helps merchants recover failed payments automatically with smart reminders and an at-a-glance revenue dashboard." />
+  <link rel="icon" href="/assets/logo.png" />
+  <style>
+    :root{
+      --teal:#009688;      /* Tinko teal */
+      --yellow:#FFC107;    /* Accent */
+      --ink:#0b1220;
+      --muted:#5b7083;
+      --bg:#f9fafa;
+      --card:#ffffff;
+      --border:#e7ebef;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    a{color:var(--teal);text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* Nav */
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{height:42px;width:auto}
+    .brand-name{font-weight:800;font-size:1.25rem;color:var(--ink)}
+    .nav-links{display:flex;gap:18px;flex-wrap:wrap}
+    .nav-links a{font-weight:600;color:var(--ink)}
+    .cta-nav{padding:10px 14px;border:1px solid var(--ink);border-radius:8px}
+
+    /* Hero */
+    .hero{background:var(--teal);color:#fff;padding:64px 24px}
+    .hero-inner{max-width:1100px;margin:0 auto;display:grid;gap:18px;text-align:center}
+    .hero h1{font-size:clamp(2rem,4.6vw,3.2rem);margin:0 0 4px;font-weight:900;letter-spacing:-.02em}
+    .hero p{margin:0 auto;max-width:760px;opacity:.95;font-size:1.12rem}
+    .hero-cta{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+    .btn{padding:12px 18px;border-radius:10px;border:none;font-weight:800;cursor:pointer}
+    .btn-primary{background:#fff;color:var(--teal)}
+    .btn-outline{background:transparent;border:2px solid #fff;color:#fff}
+
+    /* Sections */
+    .section{padding:46px 24px}
+    .title{font-size:1.8rem;font-weight:900;text-align:center;margin:0 0 24px;color:var(--ink)}
+    .grid{display:grid;gap:18px}
+    @media(min-width:900px){.grid-3{grid-template-columns:repeat(3,1fr)}.grid-2{grid-template-columns:repeat(2,1fr)}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 6px 16px #00000010}
+    .card h3{margin:0 0 8px}
+    .muted{color:var(--muted)}
+
+    /* Pricing / Form */
+    .pricing{text-align:center}
+    form.early{max-width:520px;margin:14px auto 0;display:grid;gap:10px}
+    .input{padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff}
+    .submit{background:var(--ink);color:#fff}
+
+    /* Footer */
+    .footer{padding:26px 24px;border-top:1px solid var(--border);background:#fff}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+    .foot-links{display:flex;gap:14px;flex-wrap:wrap}
+    .copy{color:var(--muted);font-size:.92rem}
+    .badge{display:inline-block;background:var(--yellow);color:#000;font-weight:800;padding:2px 8px;border-radius:999px;font-size:.78rem;margin-left:6px}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="container nav" aria-label="Primary">
+    <div class="brand">
+      <img src="/assets/logo.png" alt="Tinko logo" />
+      <span class="brand-name">Tinko</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#benefits">Benefits</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact" class="cta-nav">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Recover Failed Payments Automatically</h1>
+      <p>Stop leaving money on the table. Tinko detects failed attempts, nudges customers with smart reminders, and tracks how much revenue you recover — all in one simple dashboard.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#pricing">Join Early Access</a>
+        <a class="btn btn-outline" href="/privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section id="benefits" class="section container">
+    <h2 class="title">Why merchants choose Tinko</h2>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>More Revenue</h3>
+        <p class="muted">Recover additional income from customers who intended to pay but dropped off. Tinko brings them back, automatically.</p>
+      </div>
+      <div class="card">
+        <h3>Simple Setup</h3>
+        <p class="muted">Onboard in minutes. No checkout redesign. Start tracking recoveries right away.</p>
+      </div>
+      <div class="card">
+        <h3>Clear Insights</h3>
+        <p class="muted">See failed vs recovered amounts, recovery percentage, and total value brought back to your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="section container pricing">
+    <h2 class="title">Pricing <span class="badge">Beta</span></h2>
+    <p class="muted">Early Access is <strong>free for the first 3 months</strong>. Limited slots.</p>
+
+    <!-- Early Access form (emails you) -->
+    <form
+      class="early"
+      action="https://formsubmit.co/contact@tinko.in"
+      method="POST"
+    >
+      <!-- FormSubmit options -->
+      <input type="hidden" name="_subject" value="Tinko — Early Access Request" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="https://tinko.in/?submitted=1#pricing" />
+
+      <input class="input" name="name" placeholder="Your name" required />
+      <input class="input" type="email" name="email" placeholder="Work email" required />
+      <input class="input" name="company" placeholder="Company (optional)" />
+      <button class="btn submit" type="submit">Join Early Access</button>
+    </form>
+
+    <p class="muted" style="margin-top:10px">Prefer email? Write to <a href="mailto:contact@tinko.in">contact@tinko.in</a></p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section container">
+    <h2 class="title">Contact</h2>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Talk to us</h3>
+        <p class="muted">Questions, demos, partnerships — we’d love to help.</p>
+        <p><strong>Email:</strong> <a href="mailto:contact@tinko.in">contact@tinko.in</a></p>
+      </div>
+      <div class="card">
+        <h3>Company</h3>
+        <p class="muted">Tinko is a product of <strong>Sankalpa Innovations Pvt Ltd</strong>.</p>
+        <p class="muted">Bangalore, India</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="copy">© <span id="y"></span> Tinko • A product of Sankalpa Innovations Pvt Ltd</div>
+      <div class="foot-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/refunds.html">Refunds</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 </body>
 </html>
