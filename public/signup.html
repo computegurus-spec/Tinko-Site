@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tinko — Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="/assets/logo.png" />
+  <style>
+    :root{--teal:#009688;--yellow:#FFC107;--ink:#0b1220;--muted:#5b7083;--bg:#f9fafa;--card:#fff;--border:#e7ebef}
+    *{box-sizing:border-box} html,body{margin:0} body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    a{color:var(--teal);text-decoration:none}
+    .wrap{max-width:420px;margin:48px auto;padding:0 20px}
+    header{display:flex;justify-content:center;margin-bottom:18px}
+    header img{height:56px}
+    h1{text-align:center;margin:0 0 6px;font-size:1.8rem}
+    p.sub{text-align:center;color:var(--muted);margin:0 0 22px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:0 6px 16px #0001}
+    .btn{width:100%;padding:12px 14px;border-radius:10px;border:none;font-weight:800;cursor:pointer}
+    .btn-primary{background:var(--ink);color:#fff}
+    .btn-google{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border:1px solid var(--border);color:var(--ink)}
+    .or{display:flex;align-items:center;gap:10px;margin:12px 0;color:var(--muted);font-size:.9rem}
+    .or:before,.or:after{content:"";flex:1;height:1px;background:var(--border)}
+    .grid{display:grid;gap:10px}
+    .input{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff}
+    .row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+    .hint{color:var(--muted);font-size:.9rem}
+    footer{margin:18px 0;text-align:center;color:var(--muted);font-size:.92rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><img src="/assets/logo.png" alt="Tinko logo" /></header>
+    <h1>Create your account</h1>
+    <p class="sub">Start tracking recovered revenue in minutes.</p>
+
+    <div class="card">
+      <a class="btn btn-google" href="/oauth/google/start">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="" width="18" height="18" />
+        Continue with Google
+      </a>
+
+      <div class="or">or</div>
+
+      <form class="grid" action="/signup" method="POST">
+        <input class="input" name="name" placeholder="Full name" required />
+        <input class="input" type="email" name="email" placeholder="Work email" required />
+        <input class="input" type="password" name="password" placeholder="Create password" minlength="8" required />
+        <button class="btn btn-primary" type="submit">Create Account</button>
+      </form>
+
+      <div class="row">
+        <span class="hint">Already have an account? <a href="/login">Log in</a></span>
+      </div>
+    </div>
+
+    <footer>© <span id="y"></span> Tinko • A product of Sankalp Innovations Pvt Ltd</footer>
+  </div>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>

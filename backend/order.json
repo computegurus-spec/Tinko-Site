@@ -1,0 +1,6 @@
+{
+  "amount": 5000,
+  "currency": "INR",
+  "receipt": "order_rcpt_001",
+  "notes": { "customer_email": "buyer@example.com" }
+}
